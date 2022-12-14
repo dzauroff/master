@@ -1,59 +1,37 @@
-/* slider */
+let burger = document.querySelector('.burger');
+let menu = document.querySelector('.header__nav');
+let menuLinks = menu.querySelectorAll('.nav__link');
 
-var swiper = new Swiper('.swiper-container', {
-    autoplay: {
-        delay: 4000,
-    }, 
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-    },
-    allowTouchMove: true,
-    loop: true,
+burger.addEventListener('click',
+
+function() {
+    
+    burger.classList.toggle('burger--action');
+
+    menu.classList.toggle('header__nav--active');
+
+    document.body.classList.toggle('stop-scroll');
+
 });
 
-/* tabs */
+menuLinks.forEach(function(el) {
+    el.addEventListener('click',function() {
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.work__btn').forEach(function (e) {
-        e.addEventListener('click', function (e) {
-            const tab = e.currentTarget.dataset.path;
-            document.querySelectorAll('.tab-content').forEach(function (e) {
-                e.classList.remove('tab-content--active')
-                document.querySelector(`[data-target='${tab}']`).classList.add('tab-content--active');
-            });
-        });
+        burger.classList.remove('burger--active');
 
-        e.addEventListener('click', function (e) {
-            const tabDefault = e.currentTarget.dataset.default;
-            document.querySelectorAll('.work__btn').forEach(function (e) {
-                e.classList.remove('work__btn--default')
-                document.querySelector(`[data-path='${tabDefault}']`).classList.add('work__btn--default');
-            })
-        })
+        menu.classList.remove('header__nav--active');
+
+        document.body.classList.remove('stop-scroll');
     });
 });
 
-/* accordion */
+const btnMore = document.querySelector('.articles-more');
+const articlesItems = document.querySelectorAll('.articles-item');
 
-$( function() {
-    $( "#accordion" ).accordion({
-        collapsible: true,
-        active: false,
-    });
-  } );
-
-/* burger */
-
-const burgerBtn = document.querySelector('.burger');
-const menuClose = document.querySelector('.menu-close');
-const menuBurger = document.querySelector('.nav');
-
-burgerBtn.addEventListener('click', () => {
-    menuBurger.classList.add('burger-active');
+btnMore.addEventListener('click', () => {
+ articlesItems.forEach(el => { el.classList.add('.articles-item--visible') });
+ btnMore.closest('.articles-center').classList.add('.articles-center--hidden');
 });
 
-menuClose.addEventListener('click', () => {
-    menuBurger.classList.remove('burger-active');
-});
+
 
